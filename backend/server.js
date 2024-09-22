@@ -1,6 +1,19 @@
-const express= require("express");
+const express = require('express');
+const dotenv = require('dotenv');
+const connectDB = require('./config/db');
+const authRoutes = require('./routes/authRoutes');
+const bookRoutes = require('./routes/bookRoutes');
+const userRoutes = require('./routes/userRoutes');
+
+dotenv.config();
+connectDB();
 
 const app = express();
+app.use(express.json());
 
-// Start the server
-app.listen(process.env.PORT);
+app.use('/api/auth', authRoutes);
+app.use('/api/books', bookRoutes);
+app.use('/api/users', userRoutes);
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
