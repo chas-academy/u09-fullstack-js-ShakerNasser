@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../public/Layer_3ew.png'; // Justera sökvägen till din bild
+import logo from '../images/Layer_3ew.png'; // Justera sökvägen till din bild
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +17,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-100 p-4">
+    <nav className="bg-gray-200 p-4">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link to="/">
@@ -32,7 +32,7 @@ const Navbar = () => {
               placeholder="Search..." 
               className="border border-gray-300 rounded-l p-2"
             />
-            <button type="submit" className="bg-blue-500 text-black font-bold rounded-r p-2">
+            <button type="submit" className="bg-stone-300 text-black font-bold rounded-r p-2">
               Search
             </button>
           </form>
@@ -46,9 +46,9 @@ const Navbar = () => {
 
         {/* Links */}
         <div className={`hidden md:flex items-center space-x-4 ${isOpen ? 'hidden' : 'flex'}`}>
-          <Link to="/" className="text-black hover:text-gray-400 font-bold">Home</Link>
+          <Link to="/home" className="text-black hover:text-gray-400 font-bold">Home</Link>
           <Link to="/contact" className="text-black hover:text-gray-400 font-bold">Contact</Link>
-          <Link to="/about" className="text-black hover:text-gray-400 font-bold">About Us</Link>
+          <Link to="/aboutus" className="text-black hover:text-gray-400 font-bold">About Us</Link>
           <Link to="/mysite" className="text-black hover:text-gray-400 font-bold">My Site</Link>
           
           {/* Search Field */}
@@ -59,7 +59,7 @@ const Navbar = () => {
       {/* Mobile menu links */}
       {isOpen && (
         <div className="md:hidden flex flex-col space-y-2 mt-4">
-          <Link to="/" className="text-black hover:text-gray-400">Home</Link>
+          <Link to="/home" className="text-black hover:text-gray-400">Home</Link>
           <Link to="/contact" className="text-black hover:text-gray-400">Contact</Link>
           <Link to="/about" className="text-black hover:text-gray-400">About Us</Link>
           <Link to="/mysite" className="text-black hover:text-gray-400">My Site</Link>
