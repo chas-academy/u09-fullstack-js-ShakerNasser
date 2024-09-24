@@ -20,7 +20,7 @@ const Navbar = () => {
     <nav className="bg-gray-200 p-4">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
-        <Link to="/">
+        <Link to="/home">
           <img src={logo} alt="Logo" className="h-8" />
         </Link>
 

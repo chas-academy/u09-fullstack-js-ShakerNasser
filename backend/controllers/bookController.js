@@ -36,4 +36,14 @@ const getBookById = async (req, res) => {
   }
 }
 
-module.exports = { createBook, getBooks, getBookById};
+const getBooksByGenre = async (req, res) => {
+  const { genre } = req.params;  // Hämta genre från URL-parametrarna
+  try {
+    const books = await Book.find({ genre });  // Hämta böcker med specifik genre
+    res.status(200).json(books);  // Returnera böckerna som JSON
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching books by genre', error });
+  }
+};
+
+module.exports = { createBook, getBooks, getBookById, getBooksByGenre};

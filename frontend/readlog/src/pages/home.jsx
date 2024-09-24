@@ -1,16 +1,26 @@
 import React from 'react';
-import BookList from '../components/BookList'; // Justera sökvägen om nödvändigt
+import { Link } from 'react-router-dom';
 
-function home() {
+function Home() {
   return (
 
     
-    <div>
-      <h1>Welcome to the Home Page</h1>
-      <p>This is the home page of the application.</p>
-      <BookList />
+    <div className="bg-gray-100">
+      <div className="w-full bg-white shadow-md p-4">
+        <div className="flex justify-around mt-2">
+          <Link to="/genre/fantasy">
+            <span>Fantasy</span>
+          </Link>
+          <Link to="/genre/romance">
+            <span>Romance</span>
+          </Link>
+          <Link to="/genre/drama">
+            <span>Drama</span>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
 
-export default home;
+export default Home;
