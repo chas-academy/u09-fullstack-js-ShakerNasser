@@ -2,16 +2,15 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
 const generateToken = (user) => {
-  return jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, {
+  return jwt.sign({ email: user.email, role: user.role }, process.env.JWT_SECRET, {
     expiresIn: '1h',
   });
 };
 
-// Registrera användare
 const register = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, role } = req.body;
   try {
-    const user = await User.create({ name, email, password });
+    const user = await User.create({ name, email, password, role }); 
     const token = generateToken(user);
     res.status(201).json({ token });
   } catch (error) {

@@ -18,7 +18,7 @@ const app = express(); // Flytta denna rad upp hit
 // Middleware för CORS
 app.use(
     cors({
-      origin: "http://localhost:5173", // Ta bort snedstrecket i slutet
+      origin: "http://localhost:5173", 
       methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
       credentials: true,
     })

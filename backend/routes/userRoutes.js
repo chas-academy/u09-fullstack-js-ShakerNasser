@@ -4,7 +4,7 @@ const { protect, admin } = require('../middlewares/authMiddleware');
 const router = express.Router();
 
 // Hämta alla användare (admin-rättigheter krävs)
-router.get('/', protect, admin, getUsers);
+router.get('/', getUsers);
 
 // Uppdatera användare (admin-rättigheter krävs)
 router.put('/:id', protect, admin, updateUser);
