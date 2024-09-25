@@ -32,19 +32,6 @@ const GenrePage = () => {
     <div className="p-4">
       <h1 className="text-2xl font-bold">Books in {genre.charAt(0).toUpperCase() + genre.slice(1)}:</h1>
 
-      {/* Knappar för genrer
-      <div className="my-4 flex justify-center space-x-4">
-        <Link to="/genre/fantasy" className="text-lg text-blue-500 hover:text-blue-700">
-          Fantasy
-        </Link>
-        <Link to="/genre/romance" className="text-lg text-blue-500 hover:text-blue-700">
-          Romance
-        </Link>
-        <Link to="/genre/drama" className="text-lg text-blue-500 hover:text-blue-700">
-          Drama
-        </Link>
-      </div> */}
-
       <ul className="space-y-2">
         {books.length > 0 ? (
           books.map((book) => (

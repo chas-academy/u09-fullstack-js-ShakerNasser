@@ -18,7 +18,6 @@ const register = async (req, res) => {
   }
 };
 
-// Logga in
 const login = async (req, res) => {
   const { email, password } = req.body;
   try {

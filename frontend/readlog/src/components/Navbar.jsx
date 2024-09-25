@@ -24,19 +24,6 @@ const Navbar = () => {
           <img src={logo} alt="Logo" className="h-8" />
         </Link>
 
-        <form onSubmit={handleSearchSubmit} className="flex">
-            <input 
-              type="text" 
-              value={searchTerm} 
-              onChange={handleSearchChange} 
-              placeholder="Search..." 
-              className="border border-gray-300 rounded-l p-2"
-            />
-            <button type="submit" className="bg-stone-300 text-black font-bold rounded-r p-2">
-              Search
-            </button>
-          </form>
-
         {/* Hamburger Icon */}
         <div className="md:hidden">
           <button onClick={() => setIsOpen(!isOpen)} className="text-black">
@@ -45,14 +32,11 @@ const Navbar = () => {
         </div>
 
         {/* Links */}
-        <div className={`hidden md:flex items-center space-x-4 ${isOpen ? 'hidden' : 'flex'}`}>
+        <div className={`hidden md:flex items-center space-x-4`}>
           <Link to="/home" className="text-black hover:text-gray-400 font-bold">Home</Link>
           <Link to="/contact" className="text-black hover:text-gray-400 font-bold">Contact</Link>
           <Link to="/aboutus" className="text-black hover:text-gray-400 font-bold">About Us</Link>
           <Link to="/mysite" className="text-black hover:text-gray-400 font-bold">My Site</Link>
-          
-          {/* Search Field */}
-          
         </div>
       </div>
 
@@ -61,7 +45,7 @@ const Navbar = () => {
         <div className="md:hidden flex flex-col space-y-2 mt-4">
           <Link to="/home" className="text-black hover:text-gray-400">Home</Link>
           <Link to="/contact" className="text-black hover:text-gray-400">Contact</Link>
-          <Link to="/about" className="text-black hover:text-gray-400">About Us</Link>
+          <Link to="/aboutus" className="text-black hover:text-gray-400">About Us</Link>
           <Link to="/mysite" className="text-black hover:text-gray-400">My Site</Link>
           
           {/* Search Field for Mobile */}

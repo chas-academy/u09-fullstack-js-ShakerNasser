@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Home() {
+  const genres = ['Fantasy', 'Romance', 'Drama', 'Mystery'];
+  
   return (
     <div>
 
@@ -19,22 +21,14 @@ function Home() {
         </div>
       </div>
 
-
       <div className="bg-gray-200">
         <div className="w-full shadow-md p-4">
-          <div className="flex justify-around mt-1 font-bold ">
-            <Link to="/genre/fantasy">
-              <span className=" hover:text-gray-400" >Fantasy</span>
-            </Link>
-            <Link to="/genre/romance">
-              <span className=" hover:text-gray-400">Romance</span>
-            </Link>
-            <Link to="/genre/drama">
-              <span className=" hover:text-gray-400">Drama</span>
-            </Link>
-            <Link to="/genre/mystery">
-              <span className=" hover:text-gray-400">Mystery</span>
-            </Link>
+          <div className="flex justify-around mt-1 font-bold">
+            {genres.map((genre) => (
+              <Link to={`/genre/${genre}`} key={genre}>
+                <span className="hover:text-gray-400 capitalize">{genre}</span>
+              </Link>
+            ))}
           </div>
         </div>
       </div>
