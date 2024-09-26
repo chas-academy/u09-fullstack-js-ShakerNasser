@@ -1,33 +1,122 @@
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 
-// const BookItem = ({ book }) => {
-//   const [isInList, setIsInList] = useState(book.isInList || false);
+const BookItem = () => {
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+  const [description, setDescription] = useState('');
+  const [image, setImage] = useState(null);
+  const [genre, setGenre] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(''); // State for success message
 
-//   const toggleInList = () => {
-//     setIsInList(!isInList);
-//     // Här kan du även uppdatera backend om boken har markerats i listan
-//   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    setSuccess(''); // Clear previous success message
 
-//   return (
-//     <div className="border p-4 rounded-md shadow-md">
-//       <h2 className="text-xl font-semibold">{book.title}</h2>
-//       <p className="text-gray-600">Author: {book.author}</p>
-//       <p className="text-gray-600">Genre: {book.genre}</p>
-//       <div>
-//         <label className="inline-flex items-center mt-2">
-//           <input
-//             type="checkbox"
-//             checked={isInList}
-//             onChange={toggleInList}
-//             className="form-checkbox"
-//           />
-//           <span className="ml-2">In List</span>
-//         </label>
-//       </div>
-//     </div>
-//   );
-// };
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('author', author);
+    formData.append('description', description);
+    formData.append('image', image);
+    formData.append('genre', genre);
 
+    try {
+      await axios.post('http://localhost:3000/api/books', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
+      // Set success message after successful submission
+      setSuccess('Book added successfully!');
 
-// export default BookItem;
+      // Clear fields after submission
+      setTitle('');
+      setAuthor('');
+      setDescription('');
+      setImage(null);
+      setGenre('');
+
+      // Optional: Clear success message after 3 seconds
+      setTimeout(() => setSuccess(''), 3000);
+    } catch (err) {
+      // Handle errors properly
+      const errorMessage = err.response?.data?.message || 'Something went wrong';
+      setError(errorMessage);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-full max-w-lg">
+        <h2 className="text-xl mb-4">Add a New Book</h2>
+        
+        {error && <p className="text-red-500 mb-4">{error}</p>} {/* Render error message */}
+        
+        {success && (
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <strong className="font-bold">Success!</strong> {success}
+          </div>
+        )}
+
+        <input
+          type="text"
+          placeholder="Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="block w-full mb-4 p-2 border border-gray-300 rounded"
+          required
+        />
+        
+        <input
+          type="text"
+          placeholder="Author"
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}
+          className="block w-full mb-4 p-2 border border-gray-300 rounded"
+          required
+        />
+        
+        <textarea
+          placeholder="Description (optional)"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          className="block w-full mb-4 p-2 border border-gray-300 rounded"
+          rows="4"
+        />
+        
+        <input
+          type="file"
+          onChange={(e) => setImage(e.target.files[0])}
+          className="block w-full mb-4 p-2 border border-gray-300 rounded"
+          required
+        />
+        
+        <input
+          type="text"
+          placeholder="Genre"
+          value={genre}
+          onChange={(e) => setGenre(e.target.value)}
+          className="block w-full mb-4 p-2 border border-gray-300 rounded"
+          required
+        />
+        
+        <button
+          type="submit"
+          className={`w-full bg-blue-500 text-white p-2 rounded ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-600'}`}
+          disabled={loading}
+        >
+          {loading ? 'Adding Book...' : 'Add Book'}
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default BookItem;

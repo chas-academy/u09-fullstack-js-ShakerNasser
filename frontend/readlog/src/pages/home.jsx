@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Home() {
+  const [books, setBooks] = useState([]); // Tillstånd för att lagra böcker
   const genres = ['Fantasy', 'Romance', 'Drama', 'Mystery'];
-  
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/books'); // Hämta böcker
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setBooks(data); // Uppdatera tillståndet med böckerna
+      } catch (error) {
+        console.error('Error fetching books:', error);
+      }
+    };
+
+    fetchBooks(); // Anropa funktionen
+  }, []); // Tom array betyder att den körs en gång vid montering
+
   return (
     <div>
-
       <div className="flex items-center justify-between">
         <p className="text-left text-2xl md:text-4xl">
           Deciding what to read next?
@@ -33,6 +50,24 @@ function Home() {
         </div>
       </div>
 
+      {/* Avsnitt för att visa böckerna */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+        {books.map((book) => (
+          <div key={book._id} className="border rounded-lg p-4">
+            <img 
+              src={book.image} // Se till att du har en bild-URL i bok-objektet
+              alt={book.title} 
+              className="w-full h-48 object-cover rounded-md"
+            />
+            <h3 className="text-lg font-bold mt-2">{book.title}</h3>
+            <p className="text-gray-600">{book.author}</p>
+            {/* Eventuellt en länk till bokens sida */}
+            <Link to={`/books/${book._id}`} className="text-blue-500 hover:underline">
+              View Details
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

@@ -5,6 +5,7 @@ const authRoutes = require('./routes/authRoutes');
 const bookRoutes = require('./routes/bookRoutes');
 const userRoutes = require('./routes/userRoutes');
 const cors = require('cors');
+const path = require('path'); // Importera path-modulen
 
 // Konfigurera miljövariabler
 dotenv.config();
@@ -13,19 +14,23 @@ dotenv.config();
 connectDB();
 
 // Skapa Express-applikationen
-const app = express(); // Flytta denna rad upp hit
+const app = express();
 
 // Middleware för CORS
 app.use(
     cors({
-      origin: "http://localhost:5173", 
-      methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-      credentials: true,
+        origin: "http://localhost:5173",
+        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+        credentials: true,
     })
 );
 
 // Middleware för att tolka JSON
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Middleware för att servera statiska filer (bilder)
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Definiera rutter
 app.use('/api/auth', authRoutes);

@@ -3,11 +3,19 @@ const mongoose = require('mongoose');
 const bookSchema = new mongoose.Schema({
   title: { 
     type: String, 
-    required: true 
+    required: true // Titel är ett obligatoriskt fält
   },
   author: { 
     type: String, 
-    required: true 
+    required: true // Författare är ett obligatoriskt fält
+  },
+  description: {
+    type: String,
+    required: false, // Beskrivning är inte ett obligatoriskt fält
+  },
+  image: {
+    type: String,
+    required: false, // Bild är inte ett obligatoriskt fält
   },
   genre: { 
     type: String, 

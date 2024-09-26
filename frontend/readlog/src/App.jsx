@@ -12,6 +12,8 @@ import FAQ from '../src/pages/faq';
 import Footer from './components/Footer'; 
 import GenrePage from '../src/pages/GenrePage';  // Importera GenrePage-komponenten
 import Search from '../src/pages/search';  // Importera getSearch-komponenten
+import BookItem from './components/BookItem';  // Importera BookItem-komponenten
+import BookById from './pages/bookbyid';  // Importera BookById-komponenten
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
       <div className="p-4">
         <Routes>
           <Route path="/home" element={<Home />} />
+          <Route path="/books/:id" element={<BookById />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/mysite" element={<MySite />} />
@@ -29,6 +32,8 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/genre/:genre" element={<GenrePage />} />
           <Route path="/search" element={<Search />} /> 
+          <Route path="/BookItem" element={<BookItem />} />
+
         </Routes>
       </div>
       <Footer />
