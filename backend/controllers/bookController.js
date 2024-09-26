@@ -46,4 +46,20 @@ const getBooksByGenre = async (req, res) => {
   }
 };
 
-module.exports = { createBook, getBooks, getBookById, getBooksByGenre};
+const getSearch = async (req, res) => {
+  const searchTerm = req.query.q;  // Hämta sökterm från query-parametrar
+  try {
+    // Regex för att hitta böcker med titlar som innehåller söktermen, case-insensitive
+    const books = await Book.find({
+      title: { $regex: searchTerm, $options: 'i' }
+    });
+    
+    res.json(books);
+  } catch (err) {
+    res.status(500).json({ message: 'Error searching books', error: err });
+  }
+};
+
+
+
+module.exports = { createBook, getBooks, getBookById, getBooksByGenre, getSearch};

@@ -8,9 +8,10 @@ const Footer = () => {
                 <p>&copy; {new Date().getFullYear()} ReadLog. All right reserved.</p>
                 <nav className="mt-2">
                     <ul className="flex justify-center space-x-4">
-                    <Link to="/faq"className="hover:underline">FAQ </Link>
-                        <li><a href="/Aboutus" className="hover:underline">AboutUs</a></li>
-                        <li><a href="/contact" className="hover:underline">Contact</a></li>
+                    <Link to="/faq" className="hover:underline">FAQ </Link>
+                        <Link to="/Aboutus" className="hover:underline">AboutUs</Link>
+                        <Link to="/contact" className="hover:underline">Contact</Link>
+                        <Link to="/mysite" className="hover:underline">My Site</Link>
                     </ul>
                 </nav>
             </div>

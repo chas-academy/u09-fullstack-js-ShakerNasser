@@ -11,6 +11,7 @@ import AdminPanel from '../src/pages/adminpanel';
 import FAQ from '../src/pages/faq';
 import Footer from './components/Footer'; 
 import GenrePage from '../src/pages/GenrePage';  // Importera GenrePage-komponenten
+import Search from '../src/pages/search';  // Importera getSearch-komponenten
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/adminpanel" element={<AdminPanel />} />
           <Route path="/faq" element={<FAQ />} />
-          <Route path="/genre/:genre" element={<GenrePage />} />  {/* Lägg till ruta för specifik genre */}
+          <Route path="/genre/:genre" element={<GenrePage />} />
+          <Route path="/search" element={<Search />} /> 
         </Routes>
       </div>
       <Footer />
