@@ -30,16 +30,20 @@ const BookById = () => {
   if (error) return <p>Fel: {error}</p>;
 
   return (
-    <div className="p-4">
-      {book ? (
-        <>
-          <img src={book.image} alt={book.title} className="w-full h-48 object-cover rounded-md" />
-          <h1 className="text-lg font-bold mt-2">{book.title}</h1>
-          <p className="text-gray-600">{book.author}</p>
-          <p>{book.description}</p> 
-        </>
-      ) : (
-        <p>Ingen bok hittades.</p>
+    <div className="border rounded-lg p-4 mb-4 max-w-md mx-auto"> {/* Added styling for consistency */}
+    {book ? (
+      <>
+        <img 
+          src={book.image || "default-image-url.jpg"} // Fallback for missing images
+          alt={`Cover image of ${book.title}`} 
+          className="w-full h-48 object-cover rounded-md" 
+        />
+        <h1 className="text-lg font-bold mt-2">{book.title}</h1>
+        <p className="text-gray-600">{book.author}</p>
+        <p className="text-gray-800 mt-2">{book.description}</p> {/* Optional styling for description */}
+      </>
+    ) : (
+        <p>No book found</p>
       )}
     </div>
   );

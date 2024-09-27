@@ -51,7 +51,7 @@ function Home() {
       </div>
 
       {/* Avsnitt för att visa böckerna */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4 mb-16">
         {books.map((book) => (
           <div key={book._id} className="border rounded-lg p-4">
             <img 
