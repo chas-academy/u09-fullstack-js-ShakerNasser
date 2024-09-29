@@ -14,6 +14,7 @@ import GenrePage from '../src/pages/GenrePage';  // Importera GenrePage-komponen
 import Search from '../src/pages/search';  // Importera getSearch-komponenten
 import BookItem from './components/BookItem';  // Importera BookItem-komponenten
 import BookById from './pages/bookbyid';  // Importera BookById-komponenten
+import MyList from '../src/pages/mylist';  // Importera MyList-komponenten
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Navbar />
       <div className="p-4">
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/books/:id" element={<BookById />} />
           <Route path="/contact" element={<Contact />} />
@@ -33,6 +35,8 @@ function App() {
           <Route path="/genre/:genre" element={<GenrePage />} />
           <Route path="/search" element={<Search />} /> 
           <Route path="/BookItem" element={<BookItem />} />
+          <Route path="/mylist" element={<MyList />} />
+
 
         </Routes>
       </div>
