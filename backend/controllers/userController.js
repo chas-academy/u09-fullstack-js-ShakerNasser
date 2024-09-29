@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const mongoose = require('mongoose');
 
 // Hämta alla användare (för admin)
 const getUsers = async (req, res) => {
@@ -6,41 +7,73 @@ const getUsers = async (req, res) => {
     const users = await User.find();
     res.json(users);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetching users', error });
+    res.status(500).json({ message: 'Error fetching users', error: error.message });
   }
 };
+
+// Hämta användare efter ID
+const getUserByID = async (req, res) => {
+  const { id } = req.params; // Hämta ID från URL-parametrarna
+  try {
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user); // Returnera användaren
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching user', error: error.message });
+  }
+};
+
+// Skapa användare
+const createUser = async (req, res) => {
+  const { name, email } = req.body;
+  
+  try {
+    const newUser = new User({ name, email });
+    const savedUser = await newUser.save();
+    res.status(201).json(savedUser); // Return the newly created user
+  } catch (error) {
+    res.status(500).json({ message: 'Error creating user', error });
+  }
+};
+
 
 // Uppdatera användare
 const updateUser = async (req, res) => {
   const { id } = req.params;
-  const { name, email, role } = req.body;
+  const { name, email } = req.body;
+
   try {
-    const user = await User.findById(id);
-    if (!user) return res.status(404).json({ message: 'User not found' });
+    const updatedUser = await User.findByIdAndUpdate(id, { name, email }, { new: true });
+    if (!updatedUser) return res.status(404).json({ message: 'User not found' });
 
-    user.name = name || user.name;
-    user.email = email || user.email;
-    user.role = role || user.role;
-
-    const updatedUser = await user.save();
     res.json(updatedUser);
   } catch (error) {
     res.status(500).json({ message: 'Error updating user', error });
   }
 };
 
+
 // Ta bort användare
 const deleteUser = async (req, res) => {
   const { id } = req.params;
-  try {
-    const user = await User.findById(id);
-    if (!user) return res.status(404).json({ message: 'User not found' });
 
-    await user.remove();
-    res.json({ message: 'User removed' });
+  // Kontrollera om id är ett giltigt MongoDB-ID
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({ message: 'Invalid user ID' });
+  }
+
+  try {
+    const user = await User.findByIdAndDelete(id); 
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({ message: 'Användare raderad' }); // Returnera meddelande om att användaren har raderats
   } catch (error) {
-    res.status(500).json({ message: 'Error deleting user', error });
+    res.status(500).json({ message: 'Error deleting user', error: error.message });
   }
 };
 
-module.exports = { getUsers, updateUser, deleteUser };
+module.exports = { getUsers, createUser, updateUser, deleteUser, getUserByID };

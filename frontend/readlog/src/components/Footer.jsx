@@ -12,6 +12,8 @@ const Footer = () => {
                         <Link to="/Aboutus" className="hover:underline">AboutUs</Link>
                         <Link to="/contact" className="hover:underline">Contact</Link>
                         <Link to="/mysite" className="hover:underline">My Site</Link>
+                        <Link to="/adminpanel" className="hover:underline">Adminpanel</Link>
+
                     </ul>
                 </nav>
             </div>

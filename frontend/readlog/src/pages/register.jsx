@@ -1,13 +1,16 @@
-// src/components/Register.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  // Använd state för fältens värden och fel/success hantering
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  
+  const navigate = useNavigate();  // För att navigera till inloggningssidan
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,10 +20,28 @@ const Register = () => {
         email, 
         password 
       });
-      // Handle successful registration, e.g., save token in local storage
-      console.log(response.data.token);
+
+      // Sätt framgångsmeddelande och logga tokenen (valfritt)
+      setSuccess('Registration successful!');
+
+
+      // Rensa alla fält efter lyckad registrering
+      setName('');
+      setEmail('');
+      setPassword('');
+
+      // Omdirigera användaren till inloggningssidan efter 3 sekunder
+      setTimeout(() => {
+        setSuccess('');
+        navigate('/login');
+      }, 3000);
+      
     } catch (err) {
+      // Hantera felmeddelandet från servern eller visa ett generellt felmeddelande
       setError(err.response?.data?.message || 'Something went wrong');
+      
+      // Rensa felmeddelandet efter 3 sekunder
+      setTimeout(() => setError(''), 3000);
     }
   };
 
@@ -28,7 +49,13 @@ const Register = () => {
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md">
         <h2 className="text-xl mb-4">Register</h2>
+
+        {/* Visa felmeddelande om ett fel uppstår */}
         {error && <p className="text-red-500 mb-4">{error}</p>}
+
+        {/* Visa framgångsmeddelande om registreringen lyckas */}
+        {success && <p className="text-green-500 mb-4">{success}</p>}
+
         <input
           type="text"
           placeholder="Name"
@@ -59,9 +86,10 @@ const Register = () => {
         >
           Register
         </button>
+
         <div className="mt-4">
           <p>
-            Already member? <Link to="/register" className="text-blue-500">Login!</Link>
+            Already a member? <Link to="/login" className="text-blue-500">Login!</Link>
           </p>
         </div>
       </form>
