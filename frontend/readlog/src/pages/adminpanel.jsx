@@ -1,8 +1,11 @@
 // src/pages/AdminPanel.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import useUpdateTitle from '../hooks/UpdateTitle';  // Import the custom hook
 
 const AdminPanel = () => {
+useUpdateTitle("Admin Panel");
+
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useUpdateTitle from '../hooks/UpdateTitle';  // Import the custom hook
 
 const MyList = () => {
+  useUpdateTitle("My List");
+
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState(''); // Om du har ett sökfält

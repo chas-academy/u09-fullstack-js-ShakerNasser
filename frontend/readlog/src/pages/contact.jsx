@@ -1,6 +1,9 @@
 import React from 'react';
+import useUpdateTitle from '../hooks/UpdateTitle';  // Import the custom hook
 
 function Contact() {
+useUpdateTitle("Contact Us");
+
     return (
         <div className="p-8 max-w-4xl mx-auto">
             <h1 className="text-4xl font-bold mb-8 text-center">Contact Us</h1>

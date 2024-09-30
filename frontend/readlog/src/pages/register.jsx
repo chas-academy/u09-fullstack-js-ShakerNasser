@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import useUpdateTitle from '../hooks/UpdateTitle';  // Import the custom hook
 
 const Register = () => {
+  useUpdateTitle("Register"); 
   // Använd state för fältens värden och fel/success hantering
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');

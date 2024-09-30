@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useUpdateTitle from '../hooks/UpdateTitle';  // Import the custom hook
 
 function Home() {
+  useUpdateTitle("Home");  // Fliktiteln kommer vara "ReadLog - Home"
+
   const [books, setBooks] = useState([]); // Tillstånd för att lagra böcker
   const genres = ['Fantasy', 'Romance', 'Drama', 'Mystery'];
 

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
+import useUpdateTitle from '../hooks/UpdateTitle';  // Import the custom hook
+
 
 const Search = () => {
+  useUpdateTitle("Search Results");
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const searchTerm = query.get('q');

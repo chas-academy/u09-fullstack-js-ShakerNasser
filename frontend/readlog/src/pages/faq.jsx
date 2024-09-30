@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import useUpdateTitle from '../hooks/UpdateTitle';  // Import the custom hook
+
 
 const FAQ = () => {
+useUpdateTitle("FAQ");
+
   const [openIndex, setOpenIndex] = useState(null);
 
   const toggleFAQ = (index) => {

@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import useUpdateTitle from '../hooks/UpdateTitle';  // Import the custom hook
+
 
 const Login = () => {
+  useUpdateTitle("Login");  
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');

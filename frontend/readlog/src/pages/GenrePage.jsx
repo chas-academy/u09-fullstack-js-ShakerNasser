@@ -2,8 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
+import useUpdateTitle from '../hooks/UpdateTitle';  // Import the custom hook
+
 
 const GenrePage = () => {
+  useUpdateTitle("Books by genre"); 
+
   const { genre } = useParams();
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);

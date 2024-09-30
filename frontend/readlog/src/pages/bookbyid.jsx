@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import useUpdateTitle from '../hooks/UpdateTitle';  // Import the custom hook
 
 const BookById = () => {
+useUpdateTitle("Book Details");
+
   const { id } = useParams(); // Hämta ID från URL
   const [book, setBook] = useState(null);
   const [loading, setLoading] = useState(true);
