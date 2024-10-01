@@ -16,7 +16,7 @@ const GenrePage = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/books/genre/${genre}`); // Ensure the URL is correct
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/books/genre/${genre}`); // Ensure the URL is correct
         setBooks(response.data);
       } catch (error) {
         console.error('Error fetching books:', error);

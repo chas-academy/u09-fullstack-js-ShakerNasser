@@ -12,7 +12,7 @@ const MyList = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/books');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/books`);
         if (!response.ok) {
           throw new Error('Nätverksfel: ' + response.status);
         }

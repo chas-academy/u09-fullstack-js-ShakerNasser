@@ -22,7 +22,7 @@ useUpdateTitle("Admin Panel");
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/users');
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/users`);
         setUsers(response.data);
       } catch (err) {
         console.error('Error fetching users:', err);

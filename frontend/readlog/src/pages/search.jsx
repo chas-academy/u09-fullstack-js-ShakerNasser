@@ -17,7 +17,7 @@ const Search = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/books/search?q=${searchTerm}`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/books/search?q=${searchTerm}`);
         setBooks(response.data);
       } catch (err) {
         console.error('Error fetching books:', err);

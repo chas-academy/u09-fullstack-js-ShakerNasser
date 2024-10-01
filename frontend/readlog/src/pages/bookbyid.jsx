@@ -13,7 +13,7 @@ useUpdateTitle("Book Details");
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/books/${id}`); // Kontrollera API-endpoint
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/books/${id}`); // Kontrollera API-endpoint
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
