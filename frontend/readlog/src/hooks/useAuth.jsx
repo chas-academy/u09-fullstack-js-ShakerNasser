@@ -17,7 +17,8 @@ const useAuth = () => {
         console.error("Token decoding failed", error);
       }
     } else {
-      setIsAdmin(false);
+      console.warn("No token found"); // Lägg till en varning om ingen token hittas
+      setIsAdmin(false); // Se till att `isAdmin` sätts till false om ingen token finns
     }
   }, []); // Tom array för att köra endast vid montering
 

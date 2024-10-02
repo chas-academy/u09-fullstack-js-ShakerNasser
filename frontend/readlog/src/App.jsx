@@ -12,7 +12,7 @@ import FAQ from '../src/pages/faq';
 import Footer from './components/Footer'; 
 import GenrePage from '../src/pages/GenrePage';  // Importera GenrePage-komponenten
 import Search from '../src/pages/search';  // Importera getSearch-komponenten
-import BookItem from './components/BookItem';  // Importera BookItem-komponenten
+import BookItem from './pages/BookItem';  // Importera BookItem-komponenten
 import BookById from './pages/bookbyid';  // Importera BookById-komponenten
 import MyList from '../src/pages/mylist';  // Importera MyList-komponenten
 import PrivateRoute from './components/PrivateRoute'; // Importera PrivateRoute

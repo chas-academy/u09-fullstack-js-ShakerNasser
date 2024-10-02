@@ -1,11 +1,13 @@
+// src/pages/MySite.js
+
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useUpdateTitle from '../hooks/UpdateTitle';  // Import the custom hook
-import useAuth from '../hooks/useAuth'; // Importera den nya hooken
+import useUpdateTitle from '../hooks/UpdateTitle';
+import useAuth from '../hooks/useAuth';
 
 const MySite = () => {
   useUpdateTitle("My Site");
-  const { isAdmin } = useAuth(); // Använd den nya hooken
+  const { isAdmin } = useAuth();
 
   return (
     <div className="container mx-auto p-4 text-center">
@@ -19,7 +21,14 @@ const MySite = () => {
           </button>
         </Link>
 
-        {/* Villkorsstyrd rendering av knappen för Admin Portal */}
+        {/* Button for creating a new book */}
+        <Link to="/bookitem">
+          <button className="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition duration-200">
+            Create Book
+          </button>
+        </Link>
+
+        {/* Conditional rendering for Admin Portal */}
         {isAdmin && (
           <Link to="/adminpanel">
             <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-200">
