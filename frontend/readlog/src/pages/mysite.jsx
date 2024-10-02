@@ -1,11 +1,11 @@
-// src/pages/MySite.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useUpdateTitle from '../hooks/UpdateTitle';  // Import the custom hook
-
+import useAuth from '../hooks/useAuth'; // Importera den nya hooken
 
 const MySite = () => {
-useUpdateTitle("My Site"); 
+  useUpdateTitle("My Site");
+  const { isAdmin } = useAuth(); // Använd den nya hooken
 
   return (
     <div className="container mx-auto p-4 text-center">
@@ -19,12 +19,14 @@ useUpdateTitle("My Site");
           </button>
         </Link>
 
-        {/* Button for Admin Portal */}
-        <Link to="/adminpanel">
-          <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-200">
-            Admin Portal
-          </button>
-        </Link>
+        {/* Villkorsstyrd rendering av knappen för Admin Portal */}
+        {isAdmin && (
+          <Link to="/adminpanel">
+            <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-200">
+              Admin Portal
+            </button>
+          </Link>
+        )}
       </div>
     </div>
   );

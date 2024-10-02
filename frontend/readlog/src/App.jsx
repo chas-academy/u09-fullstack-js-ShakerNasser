@@ -15,6 +15,7 @@ import Search from '../src/pages/search';  // Importera getSearch-komponenten
 import BookItem from './components/BookItem';  // Importera BookItem-komponenten
 import BookById from './pages/bookbyid';  // Importera BookById-komponenten
 import MyList from '../src/pages/mylist';  // Importera MyList-komponenten
+import PrivateRoute from './components/PrivateRoute'; // Importera PrivateRoute
 
 function App() {
   return (
@@ -30,14 +31,12 @@ function App() {
           <Route path="/mysite" element={<MySite />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/adminpanel" element={<AdminPanel />} />
+          <Route path="/adminpanel" element={<PrivateRoute element={<AdminPanel />} />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/genre/:genre" element={<GenrePage />} />
           <Route path="/search" element={<Search />} /> 
           <Route path="/BookItem" element={<BookItem />} />
           <Route path="/mylist" element={<MyList />} />
-
-
         </Routes>
       </div>
       <Footer />
