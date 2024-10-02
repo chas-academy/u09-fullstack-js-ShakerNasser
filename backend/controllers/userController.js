@@ -27,16 +27,23 @@ const getUserByID = async (req, res) => {
 
 // Skapa användare
 const createUser = async (req, res) => {
-  const { name, email } = req.body;
+  const { name, email, password } = req.body; // Lägg till password här
   
   try {
-    const newUser = new User({ name, email });
+    // Kontrollera om användaren redan finns
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'User with this email already exists' });
+    }
+
+    const newUser = new User({ name, email, password }); // Lägg till password här
     const savedUser = await newUser.save();
-    res.status(201).json(savedUser); // Return the newly created user
+    res.status(201).json(savedUser);
   } catch (error) {
-    res.status(500).json({ message: 'Error creating user', error });
+    res.status(500).json({ message: 'Error creating user', error: error.message });
   }
 };
+
 
 
 // Uppdatera användare

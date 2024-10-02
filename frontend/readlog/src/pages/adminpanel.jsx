@@ -1,10 +1,9 @@
-// src/pages/AdminPanel.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import useUpdateTitle from '../hooks/UpdateTitle';  // Import the custom hook
 
 const AdminPanel = () => {
-useUpdateTitle("Admin Panel");
+  useUpdateTitle("Admin Panel");
 
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,6 +16,8 @@ useUpdateTitle("Admin Panel");
   // New user state
   const [newName, setNewName] = useState('');
   const [newEmail, setNewEmail] = useState('');
+  const [newPassword, setNewPassword] = useState(''); // State for the new user's password
+  const [isCreating, setIsCreating] = useState(false);  // State to show/hide the create user form
 
   // Fetch users from API
   useEffect(() => {
@@ -35,24 +36,28 @@ useUpdateTitle("Admin Panel");
     fetchUsers();
   }, []);
 
-  // Delete user
   const handleDelete = async (userId) => {
+    const token = localStorage.getItem('token');
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,  // Skickar token från localStorage
+          Authorization: `Bearer ${token}`,
         },
       };
-
-      await axios.delete(`http://localhost:3000/api/users/${userId}`, config);
-      setUsers(users.filter(user => user._id !== userId)); // Ta bort användaren från state
-      setSuccess('Användare raderad!'); // Sätt framgångsmeddelande
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/users/${userId}`, config);
+      
+      // Remove user from the list
+      setUsers(users.filter(user => user._id !== userId));
+      
+      // Set success message
+      setSuccess('User deleted!'); 
+      console.log('Success message set: User deleted!'); // Log the success message
     } catch (error) {
       console.error('Error deleting user: ', error);
-      setError('Failed to delete user'); // Sätt felmeddelande
+      setError('Failed to delete user');
     }
   };
-
+  
   // Start editing user
   const startEditing = (user) => {
     setEditingUserId(user._id);
@@ -69,71 +74,98 @@ useUpdateTitle("Admin Panel");
     }
 
     try {
-      const response = await axios.put(`http://localhost:3000/api/users/${editingUserId}`, { name: updatedName, email: updatedEmail });
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,  // Send token from localStorage
+        },
+      };
+
+      await axios.put(`${import.meta.env.VITE_API_URL}/api/users/${editingUserId}`,
+        { name: updatedName, email: updatedEmail },
+        config
+      );
       setUsers(users.map((user) => 
         user._id === editingUserId ? { ...user, name: updatedName, email: updatedEmail } : user
       ));
       setEditingUserId(null); // Reset editing user ID
       setUpdatedName(''); // Clear input fields
       setUpdatedEmail('');
-      setSuccess('Användare uppdaterad!'); // Sätt framgångsmeddelande
+      setSuccess('User updated!'); // Set success message
     } catch (err) {
       console.error('Error updating user:', err);
-      setError('Failed to update user'); // Sätt felmeddelande
+      setError('Failed to update user'); // Set error message
     }
   };
 
   // Create new user
   const handleCreate = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
-    if (!newName || !newEmail) {
-      alert("Name and email are required");
+    if (!newName || !newEmail || !newPassword) { // Check for name, email, and password
+      alert("Name, email, and password are required");
       return;
     }
 
     try {
-      const response = await axios.post('http://localhost:3000/api/users', { name: newName, email: newEmail });
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,  // Send token from localStorage
+        },
+      };
+
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, 
+        { name: newName, email: newEmail, password: newPassword },
+        config
+      );
+      
       setUsers([...users, response.data]); // Add new user to the state
       setNewName(''); // Clear input fields
       setNewEmail('');
-      setSuccess('Användare skapad!'); // Sätt framgångsmeddelande
+      setNewPassword(''); // Clear password field
+      setIsCreating(false); // Hide the form after user creation
+      setSuccess('User created!'); // Set success message
     } catch (err) {
       console.error('Error creating user:', err);
-      setError('Failed to create user'); // Sätt felmeddelande
+      setError('Failed to create user'); // Set error message
     }
   };
 
-  // Hantera meddelanden
-  const clearMessages = () => {
-    setError(null);
-    setSuccess(null);
-  };
+  // Automatically hide success message after a few seconds
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => setSuccess(null), 3000); // Remove message after 3 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
+
+  // Automatically hide error message after a few seconds
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => setError(null), 3000); // Remove message after 3 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   if (loading) {
-    return <p className="text-center text-lg">Laddar användare...</p>;
-  }
-
-  if (error) {
-    return <p className="text-center text-red-500">{error}</p>;
+    return <p className="text-center text-lg">Loading users...</p>;
   }
 
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-extrabold mb-4">Admin Panel</h1>
 
-      {/* Visa felmeddelande om ett fel uppstår */}
+      {/* Display error message if any */}
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
-      {/* Visa framgångsmeddelande om registreringen lyckas */}
+      {/* Display success message if the operation succeeds */}
       {success && <p className="text-green-500 mb-4">{success}</p>}
 
       {users.length > 0 ? (
         <table className="min-w-full bg-white border">
           <thead>
             <tr>
-              <th className="px-4 py-2 border-b">Namn</th>
-              <th className="px-4 py-2 border-b">E-post</th>
-              <th className="px-4 py-2 border-b">Åtgärder</th>
+              <th className="px-4 py-2 border-b">Name</th>
+              <th className="px-4 py-2 border-b">Email</th>
+              <th className="px-4 py-2 border-b">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -147,7 +179,7 @@ useUpdateTitle("Admin Panel");
                     onClick={() => startEditing(user)}
                     className="text-yellow-500 hover:underline mr-4"
                   >
-                    Uppdatera Användare
+                    Update User
                   </button>
 
                   {/* Delete User Button */}
@@ -155,7 +187,7 @@ useUpdateTitle("Admin Panel");
                     onClick={() => handleDelete(user._id)}
                     className="text-red-500 hover:underline"
                   >
-                    Ta Bort Användare
+                    Delete User
                   </button>
                 </td>
               </tr>
@@ -163,15 +195,15 @@ useUpdateTitle("Admin Panel");
           </tbody>
         </table>
       ) : (
-        <p>Inga användare hittades.</p>
+        <p>No users found.</p>
       )}
 
       {/* Update User Form */}
       {editingUserId && (
         <form onSubmit={handleUpdate} className="mt-6">
-          <h2 className="text-xl mb-2">Uppdatera Användare</h2>
+          <h2 className="text-xl mb-2">Update User</h2>
           <div className="flex flex-col mb-4">
-            <label className="mb-1">Namn:</label>
+            <label className="mb-1">Name:</label>
             <input
               type="text"
               value={updatedName}
@@ -181,7 +213,7 @@ useUpdateTitle("Admin Panel");
             />
           </div>
           <div className="flex flex-col mb-4">
-            <label className="mb-1">E-post:</label>
+            <label className="mb-1">Email:</label>
             <input
               type="email"
               value={updatedEmail}
@@ -194,47 +226,68 @@ useUpdateTitle("Admin Panel");
             type="submit"
             className="bg-blue-500 text-white px-4 py-2 rounded"
           >
-            Uppdatera Användare
+            Update User
           </button>
           <button
             type="button"
             onClick={() => setEditingUserId(null)}
             className="bg-gray-300 text-black px-4 py-2 rounded ml-2"
           >
-            Avbryt
+            Cancel
           </button>
         </form>
       )}
 
-      <form onSubmit={handleCreate} className="mt-6">
-        <h2 className="text-xl mb-2 font-extrabold">Skapa Ny Användare</h2>
-        <div className="flex flex-col mb-4">
-          <label className="mb-1">Namn:</label>
-          <input
-            type="text"
-            value={newName}
-            onChange={(e) => setNewName(e.target.value)}
-            className="border rounded p-2"
-            required
-          />
-        </div>
-        <div className="flex flex-col mb-4">
-          <label className="mb-1">E-post:</label>
-          <input
-            type="email"
-            value={newEmail}
-            onChange={(e) => setNewEmail(e.target.value)}
-            className="border rounded p-2"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className=" bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Skapa Användare
-        </button>
-      </form>
+      {/* Button to show/hide Create User form */}
+      <button
+        onClick={() => setIsCreating(!isCreating)}
+        className="mt-6 bg-blue-500 text-white px-4 py-2 rounded"
+      >
+        {isCreating ? 'Cancel' : 'Create New User'}
+      </button>
+
+      {/* New User Form */}
+      {isCreating && (
+        <form onSubmit={handleCreate} className="mt-6">
+          <h2 className="text-xl mb-2">Create New User</h2>
+          <div className="flex flex-col mb-4">
+            <label className="mb-1">Name:</label>
+            <input
+              type="text"
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+              className="border rounded p-2"
+              required
+            />
+          </div>
+          <div className="flex flex-col mb-4">
+            <label className="mb-1">Email:</label>
+            <input
+              type="email"
+              value={newEmail}
+              onChange={(e) => setNewEmail(e.target.value)}
+              className="border rounded p-2"
+              required
+            />
+          </div>
+          <div className="flex flex-col mb-4">
+            <label className="mb-1">Password:</label>
+            <input
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              className="border rounded p-2"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="bg-green-500 text-white px-4 py-2 rounded"
+          >
+            Create User
+          </button>
+        </form>
+      )}
     </div>
   );
 };
