@@ -1,7 +1,7 @@
 export const genres = [
     'Fantasy',
     'Science Fiction',
-    'Dystopian',
+    'Horror',
     'Adventure',
     'Romance',
     'Contemporary',

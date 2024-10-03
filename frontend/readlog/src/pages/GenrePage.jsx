@@ -39,17 +39,17 @@ const GenrePage = () => {
         Books in {genre.charAt(0).toUpperCase() + genre.slice(1)}:
       </h1>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"> {/* Grid layout för böcker */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4"> {/* Grid layout för böcker */}
         {books.length > 0 ? (
           books.map((book) => (
             <div key={book._id} className="border rounded-lg p-4"> {/* Varje bok i sitt eget kort */}
               <img 
                 src={`${import.meta.env.VITE_API_URL}/${book.image}`} // Kombinera med API URL
                 alt={`Cover of ${book.title}`} 
-                className="w-full h-48 object-cover rounded-md" 
+                className="w-full h-38 object-cover rounded-md" 
               />
               <h3 className="text-lg font-bold mt-2">{book.title}</h3>
-              <p className="text-gray-600">{book.author}</p>
+              <p className="text-gray-600"> By: {book.author}</p>
               {/* Länk till bokens sida */}
               <Link to={`/books/${book._id}`} className="text-blue-500 hover:underline">
                 View Details

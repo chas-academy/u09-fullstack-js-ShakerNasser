@@ -43,7 +43,8 @@ function Home() {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        setBooks(data); // Uppdatera tillståndet med böckerna
+        const shuffledBooks = data.sort(() => Math.random() - 0.5);
+        setBooks(shuffledBooks); // Uppdatera tillståndet med böckerna
       } catch (error) {
         console.error('Error fetching books:', error);
       }
@@ -85,20 +86,20 @@ function Home() {
       </div>
 
       {/* Avsnitt för att visa böckerna */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4 mb-16">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-4 p-4 mb-16">
         {books.map((book) => {
           return (
             <div key={book._id} className="border rounded-lg p-4">
               <img
                 src={`${import.meta.env.VITE_API_URL}/${book.image}`} // Kombinera med API URL
                 alt={book.title}
-                className="w-full h-48 object-cover rounded-md"
+                className="w-full h-38 object-cover rounded-md"
               />
 
               <Link to={`/books/${book._id}`} className="text-blue-500 hover:underline">
               <h3 className="text-lg font-bold mt-2">{book.title}</h3>
               </Link>
-              <p className="text-gray-600">{book.author}</p>
+              <p className="text-gray-600"> By: {book.author}</p>
 
               {isAdmin && (
                 <button 

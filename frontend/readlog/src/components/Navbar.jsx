@@ -26,22 +26,22 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
-    navigate('/login');
+    navigate('/home');
   };
 
   return (
     <nav className="bg-gray-200 p-4">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/home">
-          <img src={logo} alt="Logo" className="h-8" />
+          <img src={logo} alt="Logo" className="h-9" />
         </Link>
 
-        <form onSubmit={handleSearchSubmit} className="flex">
-          <input 
-            type="text" 
-            value={searchTerm} 
-            onChange={handleSearchChange} 
-            placeholder="Search..." 
+        <form onSubmit={handleSearchSubmit} className="hidden md:flex">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            placeholder="Search..."
             className="border border-gray-300 rounded-l p-2"
           />
           <button type="submit" className="bg-stone-300 text-black font-bold rounded-r p-2">
@@ -73,33 +73,18 @@ const Navbar = () => {
       </div>
 
       {isOpen && (
-        <div className="md:hidden flex flex-col space-y-2 mt-4">
-          <Link to="/home" className="text-black hover:text-gray-400">Home</Link>
-          <Link to="/contact" className="text-black hover:text-gray-400">Contact</Link>
-          <Link to="/aboutus" className="text-black hover:text-gray-400">About Us</Link>
-
-          {isLoggedIn ? (
-            <>
-              <Link to="/mysite" className="text-black hover:text-gray-400">My Site</Link>
-              <button onClick={handleLogout} className="text-black hover:text-gray-400">Log out</button>
-            </>
-          ) : (
-            <Link to="/login" className="text-black hover:text-gray-400">Log in</Link>
-          )}
-          
-          <form onSubmit={handleSearchSubmit} className="flex mt-2">
-            <input 
-              type="text" 
-              value={searchTerm} 
-              onChange={handleSearchChange} 
-              placeholder="Search..." 
-              className="border border-gray-300 rounded-l p-2"
-            />
-            <button type="submit" className="bg-blue-500 text-black rounded-r p-2">
-              Search
-            </button>
-          </form>
-        </div>
+        <form onSubmit={handleSearchSubmit} className="flex mt-2 md:hidden">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            placeholder="Search..."
+            className="border border-gray-300 rounded-l p-2"
+          />
+          <button type="submit" className="bg-blue-500 text-black rounded-r p-2">
+            Search
+          </button>
+        </form>
       )}
     </nav>
   );
