@@ -55,21 +55,25 @@ function Home() {
 
       {/* Avsnitt för att visa böckerna */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4 mb-16">
-        {books.map((book) => (
-          <div key={book._id} className="border rounded-lg p-4">
-            <img 
-              src={book.image} // Se till att du har en bild-URL i bok-objektet
-              alt={book.title} 
-              className="w-full h-48 object-cover rounded-md"
-            />
-            <h3 className="text-lg font-bold mt-2">{book.title}</h3>
-            <p className="text-gray-600">{book.author}</p>
-            {/* Eventuellt en länk till bokens sida */}
-            <Link to={`/books/${book._id}`} className="text-blue-500 hover:underline">
-              View Details
-            </Link>
-          </div>
-        ))}
+        {books.map((book) => {
+          console.log(book); // Logga hela bokobjektet
+          return (
+            <div key={book._id} className="border rounded-lg p-4">
+              <img
+                src={`${import.meta.env.VITE_API_URL}/${book.image}`} // Kombinera med API URL
+                alt={book.title}
+                className="w-full h-48 object-cover rounded-md"
+              />
+
+              <h3 className="text-lg font-bold mt-2">{book.title}</h3>
+              <p className="text-gray-600">{book.author}</p>
+              <Link to={`/books/${book._id}`} className="text-blue-500 hover:underline">
+                View Details
+              </Link>
+            </div>
+          );
+        })}
+
       </div>
     </div>
   );

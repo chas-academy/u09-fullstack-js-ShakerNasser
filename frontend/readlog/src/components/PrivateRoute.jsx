@@ -1,11 +1,12 @@
+// src/components/PrivateRoute.js
 import React from 'react';
-import { Navigate } from 'react-router-dom';
-import useAuth from '../hooks/useAuth'; // Importera den tidigare skapade useAuth hooken
+import { Route, Navigate } from 'react-router-dom';
+import useAuth  from '../hooks/useAuth'; // Anpassa sökvägen efter din struktur
 
 const PrivateRoute = ({ element }) => {
-  const { isAdmin } = useAuth(); // Hämta användarens adminstatus från useAuth hooken
+  const { isAuthenticated } = useAuth(); // Erhåller autentiseringsstatus
 
-  return isAdmin ? element : <Navigate to="/adminpanel" />; // Om användaren är admin, rendera elementet, annars navigera till /home
+  return isAuthenticated ? element : <Navigate to="/login" />;
 };
 
 export default PrivateRoute;

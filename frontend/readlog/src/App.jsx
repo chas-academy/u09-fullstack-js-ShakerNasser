@@ -28,7 +28,7 @@ function App() {
           <Route path="/books/:id" element={<BookById />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/mysite" element={<MySite />} />
+          <Route path="/mysite" element={<PrivateRoute element={<MySite />} />} /> {/* Skydda MySite */}
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/adminpanel" element={<PrivateRoute element={<AdminPanel />} />} />
