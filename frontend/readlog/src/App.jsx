@@ -16,6 +16,7 @@ import BookItem from './pages/BookItem';  // Importera BookItem-komponenten
 import BookById from './pages/bookbyid';  // Importera BookById-komponenten
 import MyList from '../src/pages/mylist';  // Importera MyList-komponenten
 import PrivateRoute from './components/PrivateRoute'; // Importera PrivateRoute
+import Genres from '../src/pages/genres';
 
 function App() {
   return (
@@ -37,6 +38,8 @@ function App() {
           <Route path="/search" element={<Search />} /> 
           <Route path="/BookItem" element={<BookItem />} />
           <Route path="/mylist" element={<MyList />} />
+          <Route path="/genres" element={<Genres />} />
+
         </Routes>
       </div>
       <Footer />

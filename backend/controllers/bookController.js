@@ -62,6 +62,23 @@ const getSearch = async (req, res) => {
   }
 };
 
+// Radera en specifik bok baserat på ID
+const deleteBook = async (req, res) => {
+  try {
+    const book = await Book.findByIdAndDelete(req.params.id);  // Hitta och radera boken med ID
+
+    if (book) {
+      res.status(200).json({ message: 'Book deleted successfully' });  // Skicka ett svar om boken raderades
+    } else {
+      res.status(404).json({ message: 'Book not found' });  // Om boken inte hittades
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting the book', error });  // Hantera fel
+  }
+};
 
 
-module.exports = { createBook, getBooks, getBookById, getBooksByGenre, getSearch};
+
+
+
+module.exports = { createBook, getBooks, getBookById, getBooksByGenre, getSearch, deleteBook };

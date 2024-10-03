@@ -6,7 +6,7 @@ import useAuth  from '../hooks/useAuth'; // Anpassa sökvägen efter din struktu
 const PrivateRoute = ({ element }) => {
   const { isAuthenticated } = useAuth(); // Erhåller autentiseringsstatus
 
-  return isAuthenticated ? element : <Navigate to="/login" />;
+  return isAuthenticated ? element : <Navigate to="/mysite" />;
 };
 
 export default PrivateRoute;

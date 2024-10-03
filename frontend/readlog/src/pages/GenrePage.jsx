@@ -44,7 +44,7 @@ const GenrePage = () => {
           books.map((book) => (
             <div key={book._id} className="border rounded-lg p-4"> {/* Varje bok i sitt eget kort */}
               <img 
-                src={book.image} // Se till att du har en bild-URL i bok-objektet
+                src={`${import.meta.env.VITE_API_URL}/${book.image}`} // Kombinera med API URL
                 alt={`Cover of ${book.title}`} 
                 className="w-full h-48 object-cover rounded-md" 
               />

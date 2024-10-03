@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import useUpdateTitle from '../hooks/UpdateTitle';  // Import the custom hook
 
 const BookById = () => {
-useUpdateTitle("Book Details");
+  useUpdateTitle("Book Details");
 
   const { id } = useParams(); // Hämta ID från URL
   const [book, setBook] = useState(null);
@@ -34,18 +34,18 @@ useUpdateTitle("Book Details");
 
   return (
     <div className="border rounded-lg p-4 mb-4 max-w-md mx-auto"> {/* Added styling for consistency */}
-    {book ? (
-      <>
-        <img 
-          src={book.image || "default-image-url.jpg"} // Fallback for missing images
-          alt={`Cover image of ${book.title}`} 
-          className="w-full h-48 object-cover rounded-md" 
-        />
-        <h1 className="text-lg font-bold mt-2">{book.title}</h1>
-        <p className="text-gray-600">{book.author}</p>
-        <p className="text-gray-800 mt-2">{book.description}</p> {/* Optional styling for description */}
-      </>
-    ) : (
+      {book ? (
+        <>
+          <img
+            src={`${import.meta.env.VITE_API_URL}/${book.image}`} // Kombinera med API URL
+            alt={`Cover image of ${book.title}`}
+            className="w-full h-48 object-cover rounded-md"
+          />
+          <h1 className="text-lg font-bold mt-2">{book.title}</h1>
+          <p className="text-gray-600">{book.author}</p>
+          <p className="text-gray-800 mt-2">{book.description}</p> {/* Optional styling for description */}
+        </>
+      ) : (
         <p>No book found</p>
       )}
     </div>
