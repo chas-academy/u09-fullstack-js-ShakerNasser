@@ -11,7 +11,7 @@ const BookList = () => {
         const fetchBooks = async () => {
             try {
                 // Ändra till att använda fullständig URL
-                const response = await axios.get('http://localhost:3000/api/books');
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/books`);
                 setBooks(response.data);
             } catch (err) {
                 setError(err.message);

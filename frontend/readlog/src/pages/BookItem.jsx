@@ -27,7 +27,7 @@ const BookItem = () => {
     const token = localStorage.getItem('token'); // Hämta token från localStorage
 
     try {
-      await axios.post('http://localhost:3000/api/books', formData, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/books`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`, // Lägg till token i headern
