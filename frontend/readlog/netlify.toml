@@ -1,0 +1,17 @@
+[build]
+  base = "frontend/readlog"  # Mappen där din Vite-app ligger
+  command = "npm run build"   # Byggkommandot
+  publish = "frontend/readlog/dist"  # Mappen med de byggda filerna
+
+[build.environment]
+  VITE_API_URL = "https://u09-fullstack-js-shakernasser.onrender.com"  # Din miljövariabel
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Content-Type = "application/javascript"  # Säkerställer rätt MIME-typ
