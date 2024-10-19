@@ -24,6 +24,7 @@ app.use(
         credentials: true,
     })
 );
+app.options('*', cors()); // Tillåt CORS för alla OPTIONS-begärningar
 
 // Middleware för att tolka JSON
 app.use(express.json());

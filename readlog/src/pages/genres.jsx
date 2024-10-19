@@ -7,7 +7,7 @@ function Genres() {
     <div className="p-4">
       <h1 className="text-3xl font-bold mb-6">Browse by Genre</h1>
       
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-4 gap-4">
         {genres.map((genre) => (
           <div key={genre} className="border rounded-lg p-4 shadow-md">
             <Link to={`/genre/${genre}`} className="text-blue-700 hover:underline capitalize">
