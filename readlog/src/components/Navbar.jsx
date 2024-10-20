@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import logo from '../images/Layer_3ew.png'; // Justera sökvägen till din bild
+import logo from '/public/images/Layer_32.png'; // Justera sökvägen till din bild
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,8 +19,10 @@ const Navbar = () => {
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
-    navigate(`/search?q=${searchTerm}`);
-    setSearchTerm('');
+    if (searchTerm) {
+      navigate(`/search?q=${searchTerm}`);
+      setSearchTerm('');
+    } 
   };
 
   const handleLogout = () => {
@@ -44,7 +46,7 @@ const Navbar = () => {
             placeholder="Search..."
             className="border border-gray-300 rounded-l p-2"
           />
-          <button type="submit" className="bg-stone-300 text-black font-bold rounded-r p-2">
+          <button type="submit" className="bg-stone-300 text-black font-bold rounded-r p-2"  disabled={!searchTerm} >
             Search
           </button>
         </form>
@@ -81,7 +83,7 @@ const Navbar = () => {
             placeholder="Search..."
             className="border border-gray-300 rounded-l p-2"
           />
-          <button type="submit" className="bg-blue-500 text-black rounded-r p-2">
+          <button type="submit" className="bg-blue-500 text-black rounded-r p-2" disabled={!searchTerm} >
             Search
           </button>
         </form>

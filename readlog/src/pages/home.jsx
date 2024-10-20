@@ -65,7 +65,7 @@ function Home() {
 
         <div className="flex justify-end">
           <img
-            src="./src/images/image.png"
+            src="/images/image.png"
             alt="React Image"
             className="max-w-xs md:max-w-md lg:max-w-lg p-3"
           />

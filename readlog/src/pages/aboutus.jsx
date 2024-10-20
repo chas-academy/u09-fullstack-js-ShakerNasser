@@ -12,7 +12,7 @@ function AboutUs() {
 
             <section className="mb-8">
                 <div className="mb-4">
-                    <img src="../src/images/history.jpg" alt="Our History" className="w-full h-64 object-cover rounded-lg" />
+                    <img src="/images/history.jpg" alt="Our History" className="w-full h-64 object-cover rounded-lg" />
                 </div>
                 <h2 className="text-2xl font-semibold mb-4">Our History</h2>
                 <p>
@@ -28,7 +28,7 @@ function AboutUs() {
 
             <section className="mb-8">
                 <div className="mb-4">
-                    <img src="../src/images/OurIdeas.jpg" alt="Our Ideas" className="w-full h-64 object-cover rounded-lg" />
+                    <img src="/images/OurIdeas.jpg" alt="Our Ideas" className="w-full h-64 object-cover rounded-lg" />
                 </div>
                 <h2 className="text-2xl font-semibold mb-4">Our Ideas</h2>
                 <p>
@@ -47,7 +47,7 @@ function AboutUs() {
 
             <section className="mb-8">
                 <div className="mb-4">
-                    <img src="../src/images/FuturePlans.jpg" alt="Future Plans" className="w-full h-64 object-cover rounded-lg" />
+                    <img src="/images/FuturePlans.jpg" alt="Future Plans" className="w-full h-64 object-cover rounded-lg" />
                 </div>
                 <h2 className="text-2xl font-semibold mb-4">Future Plans</h2>
                 <p>
@@ -69,7 +69,7 @@ function AboutUs() {
 
             <section className="mb-16">
                 <div className="mb-4">
-                    <img src="../src/images/why.jpg" alt="Why Books are Good" className="w-full h-64 object-cover rounded-lg" />
+                    <img src="/images/Why.jpg" alt="Why Books are Good" className="w-full h-64 object-cover rounded-lg" />
                 </div>
                 <h2 className="text-2xl font-semibold mb-4">Why Books are Good</h2>
                 <p>
