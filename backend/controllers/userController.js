@@ -77,7 +77,7 @@ const deleteUser = async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    res.json({ message: 'Användare raderad' }); // Returnera meddelande om att användaren har raderats
+    res.json({ message: 'User deleted' }); // Returnera meddelande om att användaren har raderats
   } catch (error) {
     res.status(500).json({ message: 'Error deleting user', error: error.message });
   }
