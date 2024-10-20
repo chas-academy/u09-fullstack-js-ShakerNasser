@@ -22,7 +22,7 @@ const Navbar = () => {
     if (searchTerm) {
       navigate(`/search?q=${searchTerm}`);
       setSearchTerm('');
-    } 
+    }
   };
 
   const handleLogout = () => {
@@ -34,30 +34,34 @@ const Navbar = () => {
   return (
     <nav className="bg-gray-200 p-4">
       <div className="container mx-auto flex justify-between items-center">
+        {/* Logo */}
         <Link to="/home">
           <img src={logo} alt="Logo" className="h-20" />
         </Link>
 
-        <form onSubmit={handleSearchSubmit} className="hidden md:flex">
+        {/* Sökformulär för större skärmar */}
+        <form onSubmit={handleSearchSubmit} className="hidden md:flex flex-grow mx-4">
           <input
             type="text"
             value={searchTerm}
             onChange={handleSearchChange}
             placeholder="Search..."
-            className="border border-gray-300 rounded-l p-2"
+            className="border border-gray-300 rounded-l p-2 flex-grow"
           />
-          <button type="submit" className="bg-stone-300 text-black font-bold rounded-r p-2"  disabled={!searchTerm} >
+          <button type="submit" className="bg-stone-300 text-black font-bold rounded-r p-2" disabled={!searchTerm}>
             Search
           </button>
         </form>
 
+        {/* Hamburger meny för mobila enheter */}
         <div className="md:hidden">
-          <button onClick={() => setIsOpen(!isOpen)} className="text-black">
+          <button onClick={() => setIsOpen(!isOpen)} className="text-black focus:outline-none">
             {isOpen ? '✖' : '☰'}
           </button>
         </div>
 
-        <div className={`hidden md:flex items-center space-x-4 ${isOpen ? 'hidden' : 'flex'}`}>
+        {/* Navigationsmeny */}
+        <div className={`md:flex items-center space-x-4 ${isOpen ? 'flex flex-col' : 'hidden'} md:flex-row`}>
           <Link to="/home" className="text-black hover:text-gray-400 font-bold">Home</Link>
           <Link to="/contact" className="text-black hover:text-gray-400 font-bold">Contact</Link>
           <Link to="/aboutus" className="text-black hover:text-gray-400 font-bold">About Us</Link>
@@ -74,6 +78,7 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Visar sökformulär när menyn är öppen på mobila enheter */}
       {isOpen && (
         <form onSubmit={handleSearchSubmit} className="flex mt-2 md:hidden">
           <input
@@ -81,9 +86,9 @@ const Navbar = () => {
             value={searchTerm}
             onChange={handleSearchChange}
             placeholder="Search..."
-            className="border border-gray-300 rounded-l p-2"
+            className="border border-gray-300 rounded-l p-2 flex-grow"
           />
-          <button type="submit" className="bg-blue-500 text-black rounded-r p-2" disabled={!searchTerm} >
+          <button type="submit" className="bg-blue-500 text-black rounded-r p-2" disabled={!searchTerm}>
             Search
           </button>
         </form>

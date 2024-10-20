@@ -1,29 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import useUpdateTitle from '../hooks/UpdateTitle';  // Import the custom hook
+import useUpdateTitle from '../hooks/UpdateTitle'; // Import the custom hook
 import useAuth from '../hooks/useAuth';
-import { genres } from '../components/genres';  // Import genres from the new file
-
+import { genres } from '../components/genres'; // Import genres from the new file
 
 function Home() {
-  useUpdateTitle("Home");  // Fliktiteln kommer vara "ReadLog - Home"
+  useUpdateTitle("Home"); // Fliktiteln kommer vara "ReadLog - Home"
 
   const { isAdmin } = useAuth();
   const [books, setBooks] = useState([]); // Tillstånd för att lagra böcker
 
   // Funktion för att radera en bok
   const deleteBook = async (bookId) => {
-    const token = localStorage.getItem('token');  // Hämta token från localStorage (om det är där du lagrar den)
-  
+    const token = localStorage.getItem('token'); // Hämta token från localStorage (om det är där du lagrar den)
+
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/books/${bookId}`, {
         method: 'DELETE',
         headers: {
-          'Authorization': `Bearer ${token}`,  // Lägg till Authorization-headern
+          'Authorization': `Bearer ${token}`, // Lägg till Authorization-headern
           'Content-Type': 'application/json'
         }
       });
-  
+
       if (response.ok) {
         // Uppdatera books tillståndet för att ta bort den raderade boken
         setBooks((prevBooks) => prevBooks.filter((book) => book._id !== bookId));
@@ -57,27 +56,27 @@ function Home() {
   const displayedGenres = genres.slice(0, 4);
 
   return (
-    <div>
-      <div className="flex items-center justify-between">
-        <p className="text-left text-2xl md:text-4xl">
+    <div className="p-4">
+      <div className="flex items-center justify-between flex-wrap">
+        <p className="text-left text-2xl md:text-4xl w-full md:w-auto mb-4">
           Deciding what to read next?
         </p>
 
-        <div className="flex justify-end">
+        <div className="flex justify-end w-full md:w-auto">
           <img
             src="/images/image.png"
             alt="React Image"
-            className="max-w-xs md:max-w-md lg:max-w-lg p-3"
+            className="w-full max-w-xs md:max-w-md lg:max-w-lg h-auto p-3"
           />
         </div>
       </div>
 
-      <div className="bg-gray-200">
+      <div className="bg-gray-200 mb-4">
         <div className="w-full shadow-md p-4">
-          <div className="flex justify-around mt-1 font-bold">
+          <div className="flex justify-around mt-1 font-bold flex-wrap">
             {/* Visa endast ett urval av genrer */}
             {displayedGenres.map((genre) => (
-              <Link to={`/genre/${genre}`} key={genre}>
+              <Link to={`/genre/${genre}`} key={genre} className="text-center p-2">
                 <span className="hover:text-gray-400 capitalize">{genre}</span>
               </Link>
             ))}
@@ -86,32 +85,30 @@ function Home() {
       </div>
 
       {/* Avsnitt för att visa böckerna */}
-      <div className="grid grid-cols-4 md:grid-cols-3 lg:grid-cols-5 gap-4 p-4 mb-16">
-        {books.map((book) => {
-          return (
-            <div key={book._id} className="border rounded-lg p-4">
-              <img
-                src={`${import.meta.env.VITE_API_URL}/${book.image}`} // Kombinera med API URL
-                alt={book.title}
-                className="w-full h-38 object-cover rounded-md"
-              />
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4 mb-16">
+        {books.map((book) => (
+          <div key={book._id} className="border rounded-lg p-4 flex flex-col">
+            <img
+              src={`${import.meta.env.VITE_API_URL}/${book.image}`} // Kombinera med API URL
+              alt={book.title}
+              className="w-full h-48 object-cover rounded-md mb-2" // Höjden på bilden är anpassad
+            />
 
-              <Link to={`/books/${book._id}`} className="text-blue-500 hover:underline">
+            <Link to={`/books/${book._id}`} className="text-blue-500 hover:underline">
               <h3 className="text-lg font-bold mt-2">{book.title}</h3>
-              </Link>
-              <p className="text-gray-600"> By: {book.author}</p>
+            </Link>
+            <p className="text-gray-600">By: {book.author}</p>
 
-              {isAdmin && (
-                <button 
-                  onClick={() => deleteBook(book._id)}  // Anropa deleteBook-funktionen
-                  className="mt-2 bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600"
-                >
-                  Delete
-                </button>
-              )}
-            </div>
-          );
-        })}
+            {isAdmin && (
+              <button
+                onClick={() => deleteBook(book._id)} // Anropa deleteBook-funktionen
+                className="mt-2 bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600"
+              >
+                Delete
+              </button>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
