@@ -1,6 +1,6 @@
 [build]
   command = "npm run build"  # Byggkommandot
-  publish = "/readlog/dist"  # Mappen med de byggda filerna
+  publish = "dist"  # Mappen med de byggda filerna
 
 [build.environment]
   VITE_API_URL = "https://u09-fullstack-js-shakernasser.onrender.com"  # Din miljövariabel
