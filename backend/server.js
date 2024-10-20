@@ -19,7 +19,7 @@ const app = express();
 // Middleware för CORS
 app.use(
     cors({
-        origin: "https://67157f007e39fd0008f87cdc--readlog.netlify.app",
+        origin: "https://readlog.netlify.app",
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
         credentials: true,
     })
