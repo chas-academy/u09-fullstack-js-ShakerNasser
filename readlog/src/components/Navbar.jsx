@@ -35,7 +35,7 @@ const Navbar = () => {
     <nav className="bg-gray-200 p-4">
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/home">
-          <img src={logo} alt="Logo" className="h-9" />
+          <img src={logo} alt="Logo" className="h-20" />
         </Link>
 
         <form onSubmit={handleSearchSubmit} className="hidden md:flex">
