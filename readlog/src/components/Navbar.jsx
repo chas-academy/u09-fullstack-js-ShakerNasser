@@ -60,7 +60,7 @@ const Navbar = () => {
         </div>
 
         {/* Navigationsmeny */}
-        <div className={`md:flex items-center space-x-4 ${isOpen ? 'flex flex-col' : 'hidden'} md:flex-row`}>
+        <div className={`md:flex items-center space-x-4 ${isOpen ? 'flex flex-col items-start p-4' : 'hidden'} md:flex-row`}>
           <Link to="/home" className="text-black hover:text-gray-400 font-bold">Home</Link>
           <Link to="/contact" className="text-black hover:text-gray-400 font-bold">Contact</Link>
           <Link to="/aboutus" className="text-black hover:text-gray-400 font-bold">About Us</Link>
@@ -79,7 +79,7 @@ const Navbar = () => {
 
       {/* Visar sökformulär när menyn är öppen på mobila enheter */}
       {isOpen && (
-        <form onSubmit={handleSearchSubmit} className="flex mt-2 md:hidden">
+        <form onSubmit={handleSearchSubmit} className="flex mt-2 md:hidden px-4">
           <input
             type="text"
             value={searchTerm}

@@ -48,7 +48,6 @@ const Register = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md">
         <h2 className="text-xl mb-4">Register</h2>
 
@@ -95,7 +94,7 @@ const Register = () => {
           </p>
         </div>
       </form>
-    </div>
+
   );
 };
 

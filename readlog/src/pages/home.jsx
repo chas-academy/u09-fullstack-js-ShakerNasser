@@ -53,7 +53,7 @@ function Home() {
   }, []); // Tom array betyder att den körs en gång vid montering
 
   // Begränsa antalet genrer som visas, t.ex. till de första fyra
-  const displayedGenres = genres.slice(0, 4);
+  const displayedGenres = genres.slice(0, 6);
 
   return (
     <div className="p-4">
@@ -72,17 +72,19 @@ function Home() {
       </div>
 
       <div className="bg-gray-200 mb-4">
-        <div className="w-full shadow-md p-4">
-          <div className="flex justify-around mt-1 font-bold flex-wrap">
-            {/* Visa endast ett urval av genrer */}
-            {displayedGenres.map((genre) => (
-              <Link to={`/genre/${genre}`} key={genre} className="text-center p-2">
-                <span className="hover:text-gray-400 capitalize">{genre}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
+  <div className="w-full shadow-md p-4">
+    <div className="flex flex-wrap justify-around md:justify-start md:gap-4 mt-1 font-bold">
+      {/* Visa endast ett urval av genrer */}
+      {displayedGenres.map((genre) => (
+        <Link to={`/genre/${genre}`} key={genre} className="flex-auto text-center p-2 min-w-[80px]">
+          <span className="hover:text-gray-400 text-sm capitalize">{genre}</span>
+        </Link>
+      ))}
+    </div>
+  </div>
+</div>
+
+
 
       {/* Avsnitt för att visa böckerna */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4 mb-16">

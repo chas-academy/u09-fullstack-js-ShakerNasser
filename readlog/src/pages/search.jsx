@@ -41,19 +41,19 @@ const Search = () => {
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="p-4">
       <h1 className="text-3xl font-extrabold mb-6">
         Search Results for "{searchTerm}"
       </h1>
       
       {books.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"> {/* Grid layout för sökresultat */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"> {/* Grid layout för sökresultat */}
           {books.map((book) => (
             <div key={book._id} className="border rounded-lg p-4"> {/* Varje bok i sitt eget kort */}
               <img 
              src={`${import.meta.env.VITE_API_URL}/${book.image}`} // Kombinera med API URL
                 alt={`Cover of ${book.title}`} 
-                className="w-full h-38 object-cover rounded-md" 
+                className="w-full h-48 object-cover rounded-md" 
               />
               <h3 className="text-lg font-bold mt-2">{book.title}</h3>
               <p className="text-gray-600">{book.author}</p>

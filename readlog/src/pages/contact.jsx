@@ -5,7 +5,7 @@ function Contact() {
 useUpdateTitle("Contact Us");
 
     return (
-        <div className="p-8 max-w-4xl mx-auto">
+        <div className="p-8 max-w-4xl mx-auto mb-10">
             <h1 className="text-4xl font-bold mb-8 text-center">Contact Us</h1>
 
             <section className="mb-8">
@@ -33,48 +33,6 @@ useUpdateTitle("Contact Us");
                         <a href="https://instagram.com/readlog" className="text-blue-500"> Instagram</a>
                     </p>
                 </div>
-            </section>
-
-            <section className="mb-16">
-                <h2 className="text-2xl font-semibold mb-4">Contact Form</h2>
-                <form className="flex flex-col space-y-4">
-                    <div>
-                        <label className="block mb-2" htmlFor="name">Name</label>
-                        <input 
-                            type="text" 
-                            id="name" 
-                            className="w-full p-2 border rounded" 
-                            placeholder="Your Name" 
-                            required 
-                        />
-                    </div>
-                    <div>
-                        <label className="block mb-2" htmlFor="email">Email</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            className="w-full p-2 border rounded" 
-                            placeholder="Your Email" 
-                            required 
-                        />
-                    </div>
-                    <div>
-                        <label className="block mb-2" htmlFor="message">Message</label>
-                        <textarea 
-                            id="message" 
-                            className="w-full p-2 border rounded" 
-                            rows="5" 
-                            placeholder="Your Message" 
-                            required 
-                        />
-                    </div>
-                    <button 
-                        type="submit" 
-                        className="bg-blue-500 text-white p-2 rounded"
-                    >
-                        Send Message
-                    </button>
-                </form>
             </section>
         </div>
     );

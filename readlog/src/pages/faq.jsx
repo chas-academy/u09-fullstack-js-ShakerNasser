@@ -12,7 +12,7 @@ useUpdateTitle("FAQ");
   };
 
   return (
-    <div className="p-6 max-w-2xl mx-auto">
+    <div className="p-6 max-w-2xl mx-auto mb-20">
       <h1 className="text-3xl font-bold mb-4">FAQ</h1>
       <h2 className="text-xl mb-6">Questions and answers</h2>
       <div className="bg-white shadow-md rounded-lg">
