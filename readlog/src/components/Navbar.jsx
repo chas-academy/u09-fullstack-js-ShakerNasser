@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import logo from '/public/images/Layer_32.png'; // Justera sökvägen till din bild
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +35,7 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link to="/home">
-          <img src={logo} alt="Logo" className="h-20" />
+          <img src="/images/Layer_32.png" alt="Logo" className="h-20" />
         </Link>
 
         {/* Sökformulär för större skärmar */}
