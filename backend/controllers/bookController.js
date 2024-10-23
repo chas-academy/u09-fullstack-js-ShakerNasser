@@ -3,16 +3,17 @@ const Book = require('../models/Book');
 // Skapa ny bok
 // Create a new book
 const createBook = async (req, res) => {
-  const { title, author, description ,genre } = req.body;
-  const image = req.file ? req.file.path : null; // Get the file path from the uploaded file
+  const { title, author, description, genre } = req.body;
+  const image = req.file ? `uploads/${req.file.filename}` : null; 
 
   try {
-    const book = await Book.create({ title, author, genre, description, image }); // Include the image path
+    const book = await Book.create({ title, author, genre, description, image }); // Inkludera bildsökvägen
     res.status(201).json(book);
   } catch (error) {
     res.status(400).json({ message: 'Error creating book', error });
   }
 };
+
 // Hämta alla böcker från databasen
 const getBooks = async (req, res) => {
   try {
