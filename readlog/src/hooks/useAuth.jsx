@@ -20,7 +20,6 @@ const useAuth = () => {
         setIsAuthenticated(false); // Om det uppstår ett fel, se till att sätta inloggning till false
       }
     } else {
-      console.warn("No token found"); // Lägg till en varning om ingen token hittas
       setIsAuthenticated(false); // Sätt `isAuthenticated` till false om ingen token finns
     }
   }, []); // Tom array för att köra endast vid montering

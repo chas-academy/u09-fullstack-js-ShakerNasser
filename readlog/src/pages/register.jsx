@@ -4,23 +4,23 @@ import { Link, useNavigate } from 'react-router-dom';
 import useUpdateTitle from '../hooks/UpdateTitle';  // Import the custom hook
 
 const Register = () => {
-  useUpdateTitle("Register"); 
+  useUpdateTitle("Register");
   // Använd state för fältens värden och fel/success hantering
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  
+
   const navigate = useNavigate();  // För att navigera till inloggningssidan
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, { 
-        name, 
-        email, 
-        password 
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
+        name,
+        email,
+        password
       });
 
       // Sätt framgångsmeddelande och logga tokenen (valfritt)
@@ -37,17 +37,18 @@ const Register = () => {
         setSuccess('');
         navigate('/login');
       }, 3000);
-      
+
     } catch (err) {
       // Hantera felmeddelandet från servern eller visa ett generellt felmeddelande
       setError(err.response?.data?.message || 'Something went wrong');
-      
+
       // Rensa felmeddelandet efter 3 sekunder
       setTimeout(() => setError(''), 3000);
     }
   };
 
   return (
+    <div className="flex items-center justify-center mt-20">
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md">
         <h2 className="text-xl mb-4">Register</h2>
 
@@ -94,7 +95,7 @@ const Register = () => {
           </p>
         </div>
       </form>
-
+    </div>
   );
 };
 

@@ -8,8 +8,8 @@ function Genres() {
       <h1 className="text-3xl font-bold mb-6">Browse by genre:</h1>
       
       <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-3 gap-6">
-        {genres.map((genre) => (
-          <div key={genre} className="border rounded-lg p-3 shadow-md">
+        {genres.map((genre, index) => (
+          <div key={index} className="border rounded-lg p-3 shadow-md">
             <Link to={`/genre/${genre}`} className="text-blue-700 text-xs hover:underline capitalize">
               {genre}
             </Link>

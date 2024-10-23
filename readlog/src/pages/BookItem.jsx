@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 
 const BookItem = () => {
@@ -10,6 +10,7 @@ const BookItem = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState('');
+  const fileInputRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,6 +43,10 @@ const BookItem = () => {
       setDescription('');
       setImage(null);
       setGenre('');
+
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
 
       // Clear success message after 3 seconds
       setTimeout(() => setSuccess(''), 3000);
@@ -96,7 +101,7 @@ const BookItem = () => {
           type="file"
           onChange={(e) => setImage(e.target.files[0])}
           className="block w-full mb-4 p-2 border border-gray-300 rounded"
-          required
+          required ref={fileInputRef}
         />
 
         <input
