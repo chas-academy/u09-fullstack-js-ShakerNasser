@@ -139,7 +139,7 @@ const AdminPanel = () => {
       </button>
 
       {isCreating && (
-        <form onSubmit={handleCreate} className="mt-6">
+        <form onSubmit={handleCreate} className="mt-6 mb-20">
           <h2 className="text-xl mb-2">Create New User</h2>
           <div className="flex flex-col mb-4">
             <label className="mb-1">Name:</label>
