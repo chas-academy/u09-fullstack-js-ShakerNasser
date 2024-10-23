@@ -66,38 +66,42 @@ function Home() {
           <img
             src="/images/image.png"
             alt="React Image"
-            className="w-full max-w-xs md:max-w-md lg:max-w-lg h-auto p-3"
+            className="w-full max-w-xs md:max-w-md lg:max-w-lg h-auto p-3 rounded-lg shadow-lg" // För att bilden ska vara responsiv och snygg
           />
         </div>
       </div>
 
       <div className="bg-gray-200 mb-4">
-  <div className="w-full shadow-md p-4">
-    <div className="flex flex-wrap justify-around md:justify-start md:gap-4 mt-1 font-bold">
-      {/* Visa endast ett urval av genrer */}
-      {displayedGenres.map((genre) => (
-        <Link to={`/genre/${genre}`} key={genre} className="flex-auto text-center p-2 min-w-[80px]">
-          <span className="hover:text-gray-400 text-sm capitalize">{genre}</span>
-        </Link>
-      ))}
-    </div>
-  </div>
-</div>
-
-
+        <div className="w-full shadow-md p-4 bg-white rounded-lg">
+          <div className="flex flex-wrap justify-around md:justify-start gap-4 mt-1 font-bold">
+            {/* Visa endast ett urval av genrer */}
+            {displayedGenres.map((genre) => (
+              <Link to={`/genre/${genre}`} key={genre} className="flex-auto text-center p-2 min-w-[90px] bg-blue-50 hover:bg-blue-100 rounded-lg">
+                <span className="hover:text-blue-600 text-sm capitalize">
+                  {genre}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
 
       {/* Avsnitt för att visa böckerna */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 p-4 mb-16">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4 mb-16">
         {books.map((book) => (
-          <div key={book._id} className="border rounded-lg p-4 flex flex-col">
-            <img
-              src={`${import.meta.env.VITE_API_URL}/${book.image}`} // Kombinera med API URL
-              alt={book.title}
-              className="w-full h-68 object-cover rounded-md mb-2" // Höjden på bilden är anpassad
-            />
+          <div key={book._id} className="border rounded-lg p-4 flex flex-col shadow-md hover:shadow-lg transition-shadow duration-300">
+            
+            {/* Ändrat här för att hålla alla bilder i samma proportioner */}
+            <div className="relative w-full" style={{ paddingBottom: '150%' }}> {/* ÄNDRING: Förhållandet 2:3 för bokbilder */}
+              <img
+                src={`${import.meta.env.VITE_API_URL}/${book.image}`} // Kombinera med API URL
+                alt={book.title}
+                className="absolute inset-0 w-full h-full object-cover rounded-md" // Lagt till 'absolute' för att fylla kortet
+              />
+            </div>
 
-            <Link to={`/books/${book._id}`} className="text-blue-500 hover:underline">
-              <h3 className="text-lg font-bold mt-2">{book.title}</h3>
+            <Link to={`/books/${book._id}`} className="text-blue-500 hover:underline mt-4">
+              <h3 className="text-lg font-bold">{book.title}</h3>
             </Link>
             <p className="text-gray-600">By: {book.author}</p>
 
