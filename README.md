@@ -1,4 +1,5 @@
 #  Fullstack Project - ReadLog
+[![Netlify Status](https://api.netlify.com/api/v1/badges/39571454-c26b-4ed4-9685-3c25576ed043/deploy-status)](https://app.netlify.com/sites/readlog/deploys)
 
 ## Table of Contents
 1. [Project Description](#project-description)
