@@ -93,7 +93,7 @@ function Home() {
             <img
               src={`${import.meta.env.VITE_API_URL}/${book.image}`} // Kombinera med API URL
               alt={book.title}
-              className="w-full h-48 object-cover rounded-md mb-2" // Höjden på bilden är anpassad
+              className="w-full h-68 object-cover rounded-md mb-2" // Höjden på bilden är anpassad
             />
 
             <Link to={`/books/${book._id}`} className="text-blue-500 hover:underline">
